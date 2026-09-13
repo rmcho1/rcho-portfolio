@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Rebecca Cho | Portfolio</title>
+<style>
+:root {
+  --paper:#f3efe7;
+  --ink:#111114;
+  --muted:#777169;
+  --line:#c9c2b7;
+  --accent:#8f79ff;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; min-height:100%; }
+body {
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+.page {
+  min-height:100svh;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  padding:24px 3.2vw 28px;
+}
+.top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.mark {
+  width:40px;
+  height:40px;
+  border:1px solid var(--ink);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.name {
+  font-size:12px;
+  letter-spacing:.04em;
+}
+.center {
+  display:grid;
+  place-items:center;
+}
+.card {
+  width:min(520px, 90vw);
+}
+.kicker {
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:18px;
+}
+h1 {
+  margin:0 0 38px;
+  font-size:clamp(42px, 5vw, 76px);
+  line-height:.95;
+  letter-spacing:-.05em;
+  font-weight:500;
+}
+.sub {
+  margin:0 0 44px;
+  font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+  font-style:italic;
+  font-size:clamp(24px, 2.4vw, 34px);
+  line-height:1.1;
+}
+.field {
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:6px;
+}
+.field input {
+  width:100%;
+  border:0;
+  background:transparent;
+  outline:0;
+  color:var(--ink);
+  font:inherit;
+  font-size:16px;
+  padding:10px 0;
+}
+.field input::placeholder {
+  color:var(--muted);
+  opacity:1;
+}
+.field button {
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  font-size:30px;
+  cursor:pointer;
+  padding:0 0 2px 18px;
+  transition:transform .3s var(--ease), color .3s ease;
+}
+.field button:hover {
+  transform:translate(5px,-4px);
+  color:var(--accent);
+}
+.status {
+  height:20px;
+  margin-top:10px;
+  font-size:10px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.bottom {
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+55% { transform:translateY(0); }
+  100% { transform:translateY(-100%); }
+}
+@media(max-width:640px) {
+  .page { padding:20px 22px 24px; }
+  .bottom { flex-direction:column; }
+}
+@media(prefers-reduced-motion:reduce) {
+  * { animation:none !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<header class="top">
+<div class="mark">RC</div>
+<div class="name">Rebecca Cho · Product Designer</div>
+</header>
+<section class="center">
+<div class="card">
+<div class="kicker">Portfolio</div>
+<h1>Enter password.</h1>
+<form id="authForm">
+<div class="field">
+<input aria-label="Portfolio password" autocomplete="current-password" id="password" placeholder="Password" type="password"/>
+<button aria-label="Enter portfolio" type="submit">→</button>
+</div>
+<div class="status" id="status"></div>
+</form>
+</div>
+</section>
+<footer class="bottom">
+<span>Rebecca Cho</span>
+<span>Product Designer</span>
+</footer>
+</main>
+
+<script>
+const PASSWORD = 'uxrcho';
+const form = document.getElementById('authForm');
+const input = document.getElementById('password');
+const status = document.getElementById('status');
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  if (input.value === PASSWORD) {
+    status.textContent = '';
+    window.location.href = 'home.html?auth=1';
+  } else {
+    status.textContent = 'Incorrect password';
+    input.value = '';
+    input.focus();
+
+    if (form.animate) {
+      form.animate(
+        [
+          { transform: 'translateX(0)' },
+          { transform: 'translateX(-6px)' },
+          { transform: 'translateX(6px)' },
+          { transform: 'translateX(0)' }
+        ],
+        { duration: 240, easing: 'ease-out' }
+      );
+    }
+  }
+});
+</script></body>
+</html>
